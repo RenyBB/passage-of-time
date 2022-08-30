@@ -59,9 +59,8 @@
     const TaskInstructions = {
             type: jsPsychInstructions,
             pages: [`<p>In this task, we are interested in your experience of the passage of time.<br>
-            Even though we use clocks to tell the time, we still have a subjetive experience of time passing.<br>
-            Sometimes, we may have the experience of time passing much quicker compared to the time of the clock.<br
-            >Other times, we may have the experience of time passing much slower compared to the time of the clock.<br><br>
+            Time normally feels like it's flowing in one direction.<br>
+            Sometimes we may have the experience of time passing faster or slower than usual.<br><br>
             You will now watch a video, and then we will ask you how fast the time seemed to pass for you.<br>`], //deleted "compared to normal"
             show_clickable_nav: true,
             allow_backward: false,
@@ -105,7 +104,9 @@
     const passage_of_time_response = {
             type: jsPsychSurveyLikert,
             questions: [
-                {prompt: "While watching this video, how fast did the time seem to pass for you compared to the time of the clock?", name: 'passage_of_time', labels: poft_response_options}, //changed from "compared to normal?"
+                {prompt: "Compared to what you normally experience, how fast did the time seem to pass for you while watching this video?",
+                 name: 'passage_of_time', 
+                 labels: poft_response_options}, //changed from "compared to normal?"
             ],
         };
 
