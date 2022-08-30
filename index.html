@@ -29,8 +29,51 @@
      // Setting parameters 
     let stim_path = "https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/";
 
-    let n_trials = 4;
-    let sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_01, n_trials);
+
+    let clips_8s_duration = [];
+    let clips_12s_duration = [];
+    let clips_16s_duration = [];
+    let clips_20s_duration = [];
+    let clips_24s_duration = [];
+    
+       // add path to stimulus array
+    for (var i = 0; i < clips_01.length; i++) {
+     if (clips_01[i].veridicalDuration == 8) {
+            clips_8s_duration[i].stimulus = clips_01.stimulus);}
+     else if(clips_01[i].veridicalDuration == 12) {
+            clips_12s_duration[i].stimulus = clips_01.stimulus);}
+      else if(clips_01[i].veridicalDuration == 16) {
+            clips_16s_duration[i].stimulus = clips_01.stimulus);}
+      else if(clips_01[i].veridicalDuration == 20) {
+            clips_20s_duration[i].stimulus = clips_01.stimulus);}
+      else if(clips_01[i].veridicalDuration == 24) {
+            clips_24s_duration[i].stimulus = clips_01.stimulus);}
+        };
+
+    const condition = [1,2,3,4,5];
+    const sampled_condition = jsPsych.randomization.sampleWithoutReplacement(condition, 1);
+    const n_trials = 4;
+    let sel_clips = [];
+    if (sampled_condition == 1) {
+      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_8s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_24s_duration, n_trials/2));
+    }
+    else if (sampled_condition == 2) { 
+      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_8s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_20s_duration, n_trials/2));
+    }
+    else if (sampled_condition == 3) { 
+      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_12s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_24s_duration, n_trials/2));
+    }
+    else if (sampled_condition == 4) { 
+      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_12s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_20s_duration, n_trials/2));
+    }
+    else if (sampled_condition == 5) { 
+      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2));
+    }
+    
+    // output: sample = [3,2];
+    
+    
+    
 
     
      // add path to stimulus array
@@ -93,25 +136,25 @@
         };
 
     const poft_response_options = [
-            "1. Much slower", 
-            "2. Moderately slower", 
-            "3. A little slower", 
-            "4. At the same speed as usual",
-            "5. A little faster",
-            "6. Moderately faster",
-            "7. Much faster"
+            "1 As slow as waiting for the bus", 
+            "2", 
+            "3, 
+            "4",
+            "5",
+            "6",
+            "7 As fast as going to the movies"
     ];
     
     const engagement_response_options = [
-            "1. Very unengaged", 
-            "2.", 
-            "3.", 
-            "4.",
-            "5. Neutral - neither unengaged nor engaged",
-            "6.",
-            "7.",
-            "8.",
-            "9. Very engaged"
+            "1 Very unengaged", 
+            "2", 
+            "3", 
+            "4",
+            "5 Neutral - neither unengaged nor engaged",
+            "6",
+            "7",
+            "8",
+            "9 Very engaged"
     ];
 
     const passage_of_time_response = {
