@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+  <head> 
+    <script src="https://unpkg.com/jspsych"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-instructions"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-video-keyboard-response"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-survey-text"></script>
+        <script src="https://unpkg.com/@jspsych/plugin-survey-likert"></script>
+    <script src="https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/StimuliFileCORRECT_THIS_IS_THE_ONE_YOU_NEED.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>
+    <style>
+      html,body {
+        background-color: #808080;
+        color: white;
+      }
+    </style>
+    
+  </head>
+  
+  <body></body>
+  <script>
+    
+    const  jsPsych = initJsPsych({
+    use_webaudio: false,
+    on_finish: function () {
+       jsPsych.data.displayData();
+    }
+  });
+  
+  let timeline = [];
+    
+     // Setting parameters 
+    let stim_path = "https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/";
+
+    let n_trials = 1;
+    let sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_01, n_trials);
+
+    
+     // add path to stimulus array
+    for (var i = 0; i < sel_clips.length; i++) {
+            sel_clips[i].server_clip_path = stim_path.concat(sel_clips[i].stimulus);
+        };
+
+     // Pre-load clips
+     // create list of all video files for preloading
+     let all_clips = [];
+     for (var i = 0; i < sel_clips.length; i++) {
+            all_clips.push(sel_clips[i].server_clip_path);
+     };
+
+
+     const preload = {
+            type: jsPsychPreload,
+            video: all_clips
+      };
+
+    timeline.push(preload);
+
+
+    // Task instructions
+    const TaskInstructions = {
+            type: jsPsychInstructions,
+            pages: ['<p>IIn this task, we are interested in your experience of the passage of time.<br>You will watch a video, and then we will ask you how fast the time seem to pass for you compared to normal. <br>'],
+            show_clickable_nav: true,
+            allow_backward: false,
+            button_label_next: 'Start Video'
+        }; 
+
+    timeline.push(TaskInstructions);
+
+
+    const video_stim = {
+            type: jsPsychVideoKeyboardResponse,
+            stimulus: [jsPsych.timelineVariable('server_clip_path')],
+            choices: 'NO KEYS',
+            autoplay: true,
+            controls: false,
+            rate: 1,
+            start: 0,
+            //stop: 3,
+            trial_ends_after_video: true,
+            response_ends_trial: false,
+            data: {
+                veridical_duration: jsPsych.timelineVariable('veridicalDuration')
+            },
+            //height: function () {return video_height = jsPsych.data.get().trials[1].height}
+            on_finish: function (data) {
+                //console.log(jsPsych.timelineVariable('veridicalDuration'));
+                //console.log(jsPsych.timelineVariable('clip_path'));
+            },
+        };
+
+    const poft_response_options = [
+            "1. Much slower", 
+            "2. Moderately slower", 
+            "3. A little slower", 
+            "4. At the same speed as usual",
+            "5. A little faster",
+            "6. Moderately faster",
+            "7. Much faster"
+    ];
+
+    const passage_of_time_response = {
+            type: jsPsychSurveyLikert,
+            questions: [
+                {prompt: "While watching this video, how fast did the time seem to pass for you compared to normal?", name: 'passage_of_time', labels: poft_response_options},
+            ],
+        };
+
+
+    const test_procedure = {
+            timeline: [video_stim, passage_of_time_response],
+            timeline_variables: sel_clips,
+            randomize_order: true
+        };
+
+    timeline.push(test_procedure);
+    jsPsych.run(timeline);
+  </script>
+</html>
