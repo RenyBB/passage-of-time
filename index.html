@@ -54,7 +54,8 @@
       else if(clips_01[i].veridicalDuration == 24) {
             clips_24s_duration[n_trials_24].stimulus = clips_01[i].stimulus}
                   n_trials_24++;
-        };
+        }; 
+    };
 
     const condition = [1,2,3,4,5];
     const sampled_condition = jsPsych.randomization.sampleWithoutReplacement(condition, 1);
