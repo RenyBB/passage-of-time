@@ -101,6 +101,18 @@
             "6. Moderately faster",
             "7. Much faster"
     ];
+    
+    const engagement_response_options = [
+            "1. Very unengaged", 
+            "2.", 
+            "3.", 
+            "4.",
+            "5. Neutral - neither unengaged nor engaged",
+            "6.",
+            "7.",
+            "8.",
+            "9. Very engaged"
+    ];
 
     const passage_of_time_response = {
             type: jsPsychSurveyLikert,
@@ -110,10 +122,19 @@
                  labels: poft_response_options}, //changed from "compared to normal?"
             ],
         };
+    
+    const engagement_response = {
+            type: jsPsychSurveyLikert,
+            questions: [
+                {prompt: "Please rate your level of engagement while watching this video.",
+                 name: 'engagement', 
+                 labels: engagement_response_options}, //changed from "compared to normal?"
+            ],
+        };
 
 
     const test_procedure = {
-            timeline: [video_stim, passage_of_time_response],
+            timeline: [video_stim, passage_of_time_response, engagement_response],
             timeline_variables: sel_clips,
             randomize_order: true
         };
