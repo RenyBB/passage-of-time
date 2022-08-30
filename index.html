@@ -29,7 +29,7 @@
      // Setting parameters 
     let stim_path = "https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/";
 
-    let n_trials = 1;
+    let n_trials = 4;
     let sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_01, n_trials);
 
     
@@ -61,7 +61,7 @@
             pages: [`<p>In this task, we are interested in your experience of the passage of time.<br>
             Time normally feels like it's flowing in one direction.<br>
             Sometimes we may have the experience of time passing faster or slower than usual.<br><br>
-            You will now watch a video, and then we will ask you how fast the time seemed to pass for you.<br>`], //deleted "compared to normal"
+            You will now watch 4 videos, and we will ask you how fast the time seemed to pass for you during each of the videos.<br>`], //deleted "compared to normal"
             show_clickable_nav: true,
             allow_backward: false,
             button_label_next: 'Start Video',
