@@ -35,19 +35,25 @@
     let clips_16s_duration = [];
     let clips_20s_duration = [];
     let clips_24s_duration = [];
+    let n_trials_8 = 0; let n_trials_12 = 0; let n_trials_16 = 0;  let n_trials_20 = 0;  let n_trials_24 = 0;   
     
        // add path to stimulus array
     for (var i = 0; i < clips_01.length; i++) {
      if (clips_01[i].veridicalDuration == 8) {
-            clips_8s_duration[i].stimulus = clips_01[i].stimulus}
+            clips_8s_duration[n_trials_8].stimulus = clips_01[i].stimulus}
+            n_trials_8++;
      else if(clips_01[i].veridicalDuration == 12) {
-            clips_12s_duration[i].stimulus = clips_01[i].stimulus}
+            clips_12s_duration[n_trials_12].stimulus = clips_01[i].stimulus}
+            n_trials_12++;
       else if(clips_01[i].veridicalDuration == 16) {
-            clips_16s_duration[i].stimulus = clips_01[i].stimulus}
+            clips_16s_duration[n_trials_16].stimulus = clips_01[i].stimulus}
+                  n_trials_16++;
       else if(clips_01[i].veridicalDuration == 20) {
-            clips_20s_duration[i].stimulus = clips_01[i].stimulus}
+            clips_20s_duration[n_trials_20].stimulus = clips_01[i].stimulus}
+                  n_trials_20++;
       else if(clips_01[i].veridicalDuration == 24) {
-            clips_24s_duration[i].stimulus = clips_01[i].stimulus}
+            clips_24s_duration[n_trials_24].stimulus = clips_01[i].stimulus}
+                  n_trials_24++;
         };
 
     const condition = [1,2,3,4,5];
