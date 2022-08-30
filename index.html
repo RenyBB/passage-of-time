@@ -38,7 +38,7 @@
     let n_trials_8 = 0; let n_trials_12 = 0; let n_trials_16 = 0;  let n_trials_20 = 0;  let n_trials_24 = 0;   
     
        // add path to stimulus array
-    for (var i = 0; i < clips_01.length; i++) {
+  /*  for (var i = 0; i < clips_01.length; i++) {
      if (clips_01[i].veridicalDuration == 8) {
             clips_8s_duration.concat(clips_01[i].stimulus);}
             //n_trials_8++}
@@ -55,12 +55,12 @@
             clips_24s_duration.concat(clips_01[i].stimulus);}
             //n_trials_24++}
     };
-
+*/
     const condition = [1,2,3,4,5];
     const sampled_condition = jsPsych.randomization.sampleWithoutReplacement(condition, 1);
     const n_trials = 4;
-    let sel_clips = [];
-    if (sampled_condition == 1) {
+    let sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_01, n_trials;
+    /*if (sampled_condition == 1) {
       sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_8s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_24s_duration, n_trials/2));
     }
     else if (sampled_condition == 2) { 
@@ -75,7 +75,7 @@
     else if (sampled_condition == 5) { 
       sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2));
     }
-    
+    */
     // output: sample = [3,2];
     
     
