@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/@jspsych/plugin-video-keyboard-response"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-text"></script>
         <script src="https://unpkg.com/@jspsych/plugin-survey-likert"></script>
-    <script src="https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/StimuliFileCORRECT_THIS_IS_THE_ONE_YOU_NEED.js" type="text/javascript"></script>
+    <script src="https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/video_files_scenetype_duration_division.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://unpkg.com/jspsych@7.1.2/css/jspsych.css"/>
     <style>
     </style>
@@ -27,58 +27,70 @@
   let timeline = [];
     
      // Setting parameters 
-    let stim_path = "https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/";
+  let stim_path = "https://uat-perceptioncensus-assets.s3.eu-west-2.amazonaws.com/stimuli/EventSegmentationVideos/";
 
-
-    let clips_8s_duration = [];
-    let clips_12s_duration = [];
-    let clips_16s_duration = [];
-    let clips_20s_duration = [];
-    let clips_24s_duration = [];
-    let n_trials_8 = 0; let n_trials_12 = 0; let n_trials_16 = 0;  let n_trials_20 = 0;  let n_trials_24 = 0;   
+  let short_city_clips = [];
+  let short_office_clips = []
+  let long_city_clips = [];
+  let long_office_clips = [];
     
-       // add path to stimulus array
-  /*  for (var i = 0; i < clips_01.length; i++) {
-     if (clips_01[i].veridicalDuration == 8) {
-            clips_8s_duration.concat(clips_01[i].stimulus);}
-            //n_trials_8++}
-     else if (clips_01[i].veridicalDuration == 12) {
-            clips_12s_duration.concat(clips_01[i].stimulus);}
-            //n_trials_12++}
-      else if (clips_01[i].veridicalDuration == 16) {
-            clips_16s_duration.concat(clips_01[i].stimulus);}
-            //n_trials_16++}
-      else if (clips_01[i].veridicalDuration == 20) {
-            clips_20s_duration.concat(clips_01[i].stimulus);}
-            //n_trials_20++}
-      else if (clips_01[i].veridicalDuration == 24) {
-            clips_24s_duration.concat(clips_01[i].stimulus);}
-            //n_trials_24++}
-    };
-*/
+    
+  let sampled_clips_short_city = [];
+  let sampled_clips_short_office = [];
+  let sampled_clips_long_city = [];
+  let sampled_clips_long_office = [];
+    
     const condition = [1,2,3,4,5];
     const sampled_condition = jsPsych.randomization.sampleWithoutReplacement(condition, 1);
     const n_trials = 4;
     let sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_01, n_trials);
-    /*if (sampled_condition == 1) {
-      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_8s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_24s_duration, n_trials/2));
+    if (sampled_condition == 1) {
+      short_city_clips = duration_8_scene_city;
+      short_office_clips = duration_8_scene_office
+      long_city_clips = duration_24_scene_city;
+      long_office_clips = duration_24_scene_office;
     }
     else if (sampled_condition == 2) { 
-      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_8s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_20s_duration, n_trials/2));
+      short_city_clips = duration_8_scene_city;
+      short_office_clips = duration_8_scene_office
+      long_city_clips = duration_20_scene_city;
+      long_office_clips = duration_20_scene_office;
+      
     }
     else if (sampled_condition == 3) { 
-      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_12s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_24s_duration, n_trials/2));
+      short_city_clips = duration_12_scene_city;
+      short_office_clips = duration_12_scene_office
+      long_city_clips = duration_24_scene_city;
+      long_office_clips = duration_24_scene_office;
+      
     }
-    else if (sampled_condition == 4) { 
-      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_12s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_20s_duration, n_trials/2));
+    else if (sampled_condition == 4) {    
+      short_city_clips = duration_12_scene_city;
+      short_office_clips = duration_12_scene_office
+      long_city_clips = duration_20_scene_city;
+      long_office_clips = duration_20_scene_office;
+      
     }
     else if (sampled_condition == 5) { 
-      sel_clips = jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2).concat(jsPsych.randomization.sampleWithoutReplacement(clips_16s_duration, n_trials/2));
+      short_city_clips = duration_16_scene_city;
+      short_office_clips = duration_16_scene_office
+      long_city_clips = duration_16_scene_city;
+      long_office_clips = duration_16_scene_office;
+      
     }
-    */
-    // output: sample = [3,2];
     
-    
+
+    sampled_clips_short_city = jsPsych.randomization.sampleWithoutReplacement(short_city_clips, 1);
+    sampled_clips_short_office = jsPsych.randomization.sampleWithoutReplacement(short_office_clips, 1);
+    sampled_clips_long_city = jsPsych.randomization.sampleWithoutReplacement(long_city_clips, 1);
+    sampled_clips_long_office = jsPsych.randomization.sampleWithoutReplacement(long_office_clips, 1);
+      
+    while (sampled_clips_short_city.movieID == sampled_clips_long_city.movieID)
+      {sampled_clips_short_city = jsPsych.randomization.sampleWithoutReplacement(short_city_clips, 1);}
+    while (sampled_clips_short_office.movieID == sampled_clips_long_office.movieID)
+      {sampled_clips_short_office = jsPsych.randomization.sampleWithoutReplacement(short_office_clips, 1);}
+      
+    sel_clips = sampled_clips_short_city.concat(sampled_clips_short_office).concat(sampled_clips_long_city).concat(sampled_clips_long_office);
     
 
     
