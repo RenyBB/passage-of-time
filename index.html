@@ -77,10 +77,10 @@
     }
     
 
-    sampled_clips_short_city = jsPsych.randomization.sampleWithoutReplacement(short_city_clips, 1);
-    sampled_clips_short_office = jsPsych.randomization.sampleWithoutReplacement(short_office_clips, 1);
-    sampled_clips_long_city = jsPsych.randomization.sampleWithoutReplacement(long_city_clips, 1);
-    sampled_clips_long_office = jsPsych.randomization.sampleWithoutReplacement(long_office_clips, 1);
+    sampled_clips_short_city = jsPsych.randomization.sampleWithoutReplacement(short_city_clips, 1)[0];
+    sampled_clips_short_office = jsPsych.randomization.sampleWithoutReplacement(short_office_clips, 1)[0];
+    sampled_clips_long_city = jsPsych.randomization.sampleWithoutReplacement(long_city_clips, 1)[0];
+    sampled_clips_long_office = jsPsych.randomization.sampleWithoutReplacement(long_office_clips, 1)[0];
       
     while (sampled_clips_short_city.movieID == sampled_clips_long_city.movieID)
       {sampled_clips_short_city = jsPsych.randomization.sampleWithoutReplacement(short_city_clips, 1);}
